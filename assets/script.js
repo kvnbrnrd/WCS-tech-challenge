@@ -13,7 +13,7 @@ $(document).ready(function() {
         });
 // Au clic sur le bouton d'ajout, si l'input est vide, il passe en rouge et on montre une erreur, sinon on appelle addArgonaute avec le contenu de l'input en paramètre.
     $('.member-add').on('click', function() {
-        let nom = $('#name').val();
+        let nom = $('#name').val().replace(/[^0-9A-zÀ-ú-_,.]/g, ''); // Failles XSS : on enlève tout ce qui n'est pas alphanumérique
         if (nom == "") { 
             $('#name').css("border", "1px solid var(--wcs-color)");
             $('.error').empty().append("Veuillez entrer le nom de l'Argonaute à ajouter.");
@@ -41,8 +41,7 @@ function addArgonaute(nom) {
             let number = $('.member-item').length;
             $(".member-amount").empty().append("("+number+")");
             if (number >= 50) {
-                $('.error').empty().append('Il ne peut pas y avoir plus de 50 membres à bord !');
-                $('#name').css("border", "1px solid var(--wcs-color)");
+                $('.error').empty().append('Équipage au complet, parés pour retrouver la toison d\'or !');
             }
             },
         });

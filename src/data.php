@@ -9,7 +9,7 @@ require '../db/connect.php';
 // Si il y a 49 argonautes ou moins, on permet d'insérer un argonaute (pour ne pas dépasser les 50)
   if ($count <= 49) {
     if(isset($_POST['nom'])){
-      $nom = $_POST['nom'];
+      $nom = htmlspecialchars($_POST['nom'], ENT_QUOTES);
       $sql = "INSERT INTO argonautes (nom) VALUES (?)";
       $stmt= $pdo->prepare($sql);
       $stmt->execute([$nom]);
