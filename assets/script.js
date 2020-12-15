@@ -40,8 +40,9 @@ function addArgonaute(nom) {
             $(".member-list").empty().append(response);
             let number = $('.member-item').length;
             $(".member-amount").empty().append("("+number+")");
-            if (number > 50) {
-                $('.error').empty().append('Il ne peut pas y avoir plus de 50 membres à bord !')
+            if (number >= 50) {
+                $('.error').empty().append('Il ne peut pas y avoir plus de 50 membres à bord !');
+                $('#name').css("border", "1px solid var(--wcs-color)");
             }
             },
         });
